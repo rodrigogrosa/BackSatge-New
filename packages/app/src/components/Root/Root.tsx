@@ -16,6 +16,7 @@
 
 import { PropsWithChildren } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import clsx from 'clsx';
 import HomeIcon from '@material-ui/icons/Home';
 import CreateComponentIcon from '@material-ui/icons/AddCircleOutline';
 import SearchIcon from '@material-ui/icons/Search';
@@ -51,16 +52,34 @@ import CategoryIcon from '@material-ui/icons/Category';
 
 const useSidebarLogoStyles = makeStyles({
   root: {
-    width: sidebarConfig.drawerWidthClosed,
+    width: '100%',
     height: 3 * sidebarConfig.logoHeight,
     display: 'flex',
     flexFlow: 'row nowrap',
     alignItems: 'center',
+    justifyContent: 'center',
     marginBottom: -14,
   },
-  link: {
-    width: sidebarConfig.drawerWidthClosed,
+  linkBase: {
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    textDecoration: 'none',
+  },
+  linkExpanded: {
     marginLeft: 24,
+    justifyContent: 'flex-start',
+  },
+  linkCollapsed: {
+    marginLeft: 0,
+    justifyContent: 'center',
+  },
+  expandedLogo: {
+    maxWidth: '80%',
+  },
+  collapsedIcon: {
+    width: 45,
+    height: 35,
   },
 });
 
@@ -70,8 +89,20 @@ const SidebarLogo = () => {
 
   return (
     <div className={classes.root}>
-      <Link to="/" underline="none" className={classes.link} aria-label="Home">
-        {isOpen ? <LogoFull /> : <LogoIcon />}
+      <Link
+        to="/"
+        underline="none"
+        className={clsx(
+          classes.linkBase,
+          isOpen ? classes.linkExpanded : classes.linkCollapsed,
+        )}
+        aria-label="Início"
+      >
+        {isOpen ? (
+          <LogoFull className={classes.expandedLogo} />
+        ) : (
+          <LogoIcon className={classes.collapsedIcon} />
+        )}
       </Link>
     </div>
   );
@@ -81,7 +112,7 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
   <SidebarPage>
     <Sidebar>
       <SidebarLogo />
-      <SidebarGroup label="Search" icon={<SearchIcon />} to="/search">
+      <SidebarGroup label="Busca" icon={<SearchIcon />} to="/search">
         <SidebarSearchModal>
           {({ toggleModal }) => <SearchModal toggleModal={toggleModal} />}
         </SidebarSearchModal>
@@ -89,21 +120,21 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
       <SidebarDivider />
       <SidebarGroup label="Menu" icon={<MenuIcon />}>
         {/* Global nav, not org-specific */}
-        <SidebarItem icon={HomeIcon} to="home" text="Home" />
-        <SidebarItem icon={CategoryIcon} to="/" text="Catalog">
-          <SidebarSubmenu title="Catalog">
+        <SidebarItem icon={HomeIcon} to="home" text="Início" />
+        <SidebarItem icon={CategoryIcon} to="/" text="Catálogo">
+          <SidebarSubmenu title="Catálogo">
             <SidebarSubmenuItem
-              title="Domains"
+              title="Domínios"
               to="catalog?filters[kind]=domain"
               icon={useApp().getSystemIcon('kind:domain')}
             />
             <SidebarSubmenuItem
-              title="Systems"
+              title="Sistemas"
               to="catalog?filters[kind]=system"
               icon={useApp().getSystemIcon('kind:system')}
             />
             <SidebarSubmenuItem
-              title="Components"
+              title="Componentes"
               to="catalog?filters[kind]=component"
               icon={useApp().getSystemIcon('kind:component')}
             />
@@ -114,26 +145,26 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
             />
             <SidebarDivider />
             <SidebarSubmenuItem
-              title="Resources"
+              title="Recursos"
               to="catalog?filters[kind]=resource"
               icon={useApp().getSystemIcon('kind:resource')}
             />
             <SidebarDivider />
             <SidebarSubmenuItem
-              title="Groups"
+              title="Grupos"
               to="catalog?filters[kind]=group"
               icon={useApp().getSystemIcon('kind:group')}
             />
             <SidebarSubmenuItem
-              title="Users"
+              title="Usuários"
               to="catalog?filters[kind]=user"
               icon={useApp().getSystemIcon('kind:user')}
             />
           </SidebarSubmenu>
         </SidebarItem>
         <MyGroupsSidebarItem
-          singularTitle="My Squad"
-          pluralTitle="My Squads"
+          singularTitle="Meu Squad"
+          pluralTitle="Meus Squads"
           icon={useApp().getSystemIcon('group')!}
         />
         <SidebarItem
@@ -144,16 +175,16 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
         <SidebarItem
           icon={useApp().getSystemIcon('docs')!}
           to="docs"
-          text="Docs"
+          text="Documentação"
         />
-        <SidebarItem icon={CreateComponentIcon} to="create" text="Create..." />
+        <SidebarItem icon={CreateComponentIcon} to="create" text="Criar..." />
         {/* End global nav */}
         <SidebarDivider />
         <SidebarScrollWrapper>
           <SidebarItem
             icon={UpdateIcon}
             to="catalog-unprocessed-entities"
-            text="Unprocessed Entities"
+            text="Entidades não processadas"
           />
         </SidebarScrollWrapper>
       </SidebarGroup>
@@ -162,12 +193,12 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
       <NotificationsSidebarItem />
       <SidebarDivider />
       <SidebarGroup
-        label="Settings"
+        label="Configurações"
         icon={<UserSettingsSignInAvatar />}
         to="/settings"
       >
         <SidebarSettings />
-        <SidebarItem icon={BuildIcon} to="devtools" text="DevTools" />
+        <SidebarItem icon={BuildIcon} to="devtools" text="Ferramentas de Dev" />
       </SidebarGroup>
     </Sidebar>
     {children}

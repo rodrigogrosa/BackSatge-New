@@ -74,9 +74,12 @@ import {
 import { CustomizableHomePage } from './components/home/CustomizableHomePage';
 import { HomePage } from './components/home/HomePage';
 import { BuiThemerPage } from '@backstage/plugin-mui-to-bui';
+import { userSettingsTranslations } from './translations/userSettings';
+import { onemindTheme } from './themes/onemindTheme';
 
 const app = createApp({
   apis,
+  themes: [onemindTheme],
   icons: {
     // Custom icon example
     alert: AlarmIcon,
@@ -94,11 +97,16 @@ const app = createApp({
         <SignInPage
           {...props}
           providers={['guest', 'custom', ...providers]}
-          title="Select a sign-in method"
+          title="Selecione um método de login"
           align="center"
         />
       );
     },
+  },
+  __experimentalTranslations: {
+    defaultLanguage: 'pt-BR',
+    availableLanguages: ['pt-BR', 'en'],
+    resources: [userSettingsTranslations],
   },
 });
 
@@ -174,7 +182,7 @@ const routes = (
           defaultPreviewTemplate={defaultPreviewTemplate}
           groups={[
             {
-              title: 'Recommended',
+              title: 'Recomendados',
               filter: entity =>
                 entity?.metadata?.tags?.includes('recommended') ?? false,
             },
@@ -196,10 +204,10 @@ const routes = (
     </Route>
 
     <Route path="/settings" element={<UserSettingsPage />}>
-      <SettingsLayout.Route path="/advanced" title="Advanced">
+      <SettingsLayout.Route path="/advanced" title="Avançado">
         <AdvancedSettings />
       </SettingsLayout.Route>
-      <SettingsLayout.Route path="/notifications" title="Notifications">
+      <SettingsLayout.Route path="/notifications" title="Notificações">
         <UserNotificationSettingsCard
           originNames={{ 'plugin:scaffolder': 'Scaffolder' }}
         />

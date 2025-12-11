@@ -7,7 +7,7 @@
     <meta name="color-scheme" content="light dark" />
     <meta
       name="description"
-      content="Backstage is an open source framework for building developer portals"
+      content="Claro OneMind centraliza experiências e ferramentas para desenvolvedores"
     />
     <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -42,7 +42,7 @@
       href="<%= publicPath %>/safari-pinned-tab.svg"
       color="#5bbad5"
     />
-    <title><%= config.getOptionalString('app.title') ?? 'Backstage' %></title>
+    <title><%= config.getOptionalString('app.title') ?? 'OneMind' %></title>
 
     <% if (config.has('app.datadogRum')) { %>
     <script>
@@ -71,7 +71,7 @@
           applicationId:
             '<%= config.getString("app.datadogRum.applicationId") %>',
           site: '<%= config.getOptionalString("app.datadogRum.site") || "datadoghq.com" %>',
-          service: 'backstage',
+          service: 'onemind',
           env: '<%= config.getString("app.datadogRum.env") %>',
           sampleRate:
             '<%= config.getOptionalNumber("app.datadogRum.sessionSampleRate") || 100 %>',

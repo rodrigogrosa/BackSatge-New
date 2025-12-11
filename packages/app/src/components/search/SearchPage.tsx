@@ -63,27 +63,30 @@ const SearchPage = () => {
 
   return (
     <Page themeId="home">
-      {!isMobile && <Header title="Search" />}
+      {!isMobile && <Header title="Busca" />}
       <Content>
         <Grid container direction="row">
           <Grid item xs={12}>
-            <SearchBar debounceTime={100} />
+            <SearchBar
+              debounceTime={100}
+              placeholder="Buscar por serviços, documentação e mais"
+            />
           </Grid>
           {!isMobile && (
             <Grid item xs={3}>
               <SearchType.Accordion
-                name="Result type"
+                name="Tipo de resultado"
                 defaultValue="software-catalog"
                 showCounts
                 types={[
                   {
                     value: 'software-catalog',
-                    name: 'Software Catalog',
+                    name: 'Catálogo de Software',
                     icon: <CatalogIcon />,
                   },
                   {
                     value: 'techdocs',
-                    name: 'Documentation',
+                    name: 'Documentação',
                     icon: <DocsIcon />,
                   },
                 ]}
@@ -92,7 +95,7 @@ const SearchPage = () => {
                 {types.includes('techdocs') && (
                   <SearchFilter.Select
                     className={classes.filter}
-                    label="Entity"
+                    label="Entidade"
                     name="name"
                     values={async () => {
                       // Return a list of entities which are documented.
@@ -115,15 +118,21 @@ const SearchPage = () => {
                 )}
                 <SearchFilter.Select
                   className={classes.filter}
-                  label="Kind"
+                  label="Tipo"
                   name="kind"
-                  values={['Component', 'Template']}
+                  values={[
+                    { value: 'Component', label: 'Componente' },
+                    { value: 'Template', label: 'Template' },
+                  ]}
                 />
                 <SearchFilter.Select
                   className={classes.filter}
-                  label="Lifecycle"
+                  label="Ciclo de vida"
                   name="lifecycle"
-                  values={['experimental', 'production']}
+                  values={[
+                    { value: 'experimental', label: 'Experimental' },
+                    { value: 'production', label: 'Produção' },
+                  ]}
                 />
               </Paper>
             </Grid>

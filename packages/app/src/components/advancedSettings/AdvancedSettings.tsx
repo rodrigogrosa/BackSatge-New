@@ -37,19 +37,19 @@ export function AdvancedSettings() {
   return (
     <Grid container direction="row" spacing={3}>
       <Grid item xs={12} md={6}>
-        <InfoCard title="Advanced settings" variant="gridItem">
+        <InfoCard title="Configurações avançadas" variant="gridItem">
           <List>
             <ListItem>
               <ListItemText
-                primary="Advanced user option"
-                secondary="An extra settings tab to further customize the experience"
+                primary="Opção avançada de usuário"
+                secondary="Uma aba adicional de configurações para personalizar a experiência"
               />
               <ListItemSecondaryAction>
                 <Switch
                   color="primary"
                   value={value}
                   onChange={toggleValue}
-                  name="advanced"
+                  name="configuracoes-avancadas"
                 />
               </ListItemSecondaryAction>
             </ListItem>

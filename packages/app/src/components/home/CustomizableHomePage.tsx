@@ -16,7 +16,6 @@
 import { Page, Content } from '@backstage/core-components';
 import {
   HomePageCompanyLogo,
-  TemplateBackstageLogo,
   HomePageStarredEntities,
   HomePageToolkit,
   CustomHomepageGrid,
@@ -27,8 +26,8 @@ import {
 import { HomePageSearchBar } from '@backstage/plugin-search';
 import Grid from '@material-ui/core/Grid';
 
-import { tools, useLogoStyles } from './shared';
-import { WelcomeTitle } from '@backstage/plugin-home';
+import { HomeWelcomeHero, tools, useLogoStyles } from './shared';
+import LogoFull from '../Root/LogoFull';
 
 const defaultConfig = [
   {
@@ -70,7 +69,7 @@ const defaultConfig = [
 ];
 
 export const CustomizableHomePage = () => {
-  const { svg, path, container } = useLogoStyles();
+  const { container, logoWrapper } = useLogoStyles();
 
   return (
     <Page themeId="home">
@@ -78,13 +77,13 @@ export const CustomizableHomePage = () => {
         <Grid container justifyContent="center">
           <HomePageCompanyLogo
             className={container}
-            logo={<TemplateBackstageLogo classes={{ svg, path }} />}
+            logo={<LogoFull className={logoWrapper} />}
           />
         </Grid>
+        <HomeWelcomeHero />
 
         <CustomHomepageGrid config={defaultConfig}>
-          <WelcomeTitle variant="h1" />
-          <HomePageSearchBar />
+          <HomePageSearchBar placeholder="Buscar no OneMind" />
           <HomePageRecentlyVisited />
           <HomePageTopVisited />
           <HomePageToolkit tools={tools} />

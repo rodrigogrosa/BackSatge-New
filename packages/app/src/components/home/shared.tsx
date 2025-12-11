@@ -14,46 +14,74 @@
  * limitations under the License.
  */
 
-import { TemplateBackstageLogoIcon } from '@backstage/plugin-home';
+import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import LogoIcon from '../Root/LogoIcon';
 
 export const useLogoStyles = makeStyles(theme => ({
   container: {
     margin: theme.spacing(5, 0),
   },
-  svg: {
-    width: 'auto',
-    height: 100,
-  },
-  path: {
-    fill: '#7df3e1',
+  logoWrapper: {
+    width: '69%',
   },
 }));
+
+const useToolIconStyles = makeStyles({
+  icon: {
+    width: 38,
+    height: 32,
+  },
+});
+
+const OneMindToolIcon = () => {
+  const { icon } = useToolIconStyles();
+
+  return <LogoIcon className={icon} />;
+};
 
 export const tools = [
   {
     url: 'https://backstage.io/docs',
-    label: 'Docs',
-    icon: <TemplateBackstageLogoIcon />,
+    label: 'Documentação',
+    icon: <OneMindToolIcon />,
   },
   {
     url: 'https://github.com/backstage/backstage',
     label: 'GitHub',
-    icon: <TemplateBackstageLogoIcon />,
+    icon: <OneMindToolIcon />,
   },
   {
     url: 'https://github.com/backstage/backstage/blob/master/CONTRIBUTING.md',
-    label: 'Contributing',
-    icon: <TemplateBackstageLogoIcon />,
+    label: 'Contribuindo',
+    icon: <OneMindToolIcon />,
   },
   {
     url: 'https://backstage.io/plugins',
-    label: 'Plugins Directory',
-    icon: <TemplateBackstageLogoIcon />,
+    label: 'Diretório de plugins',
+    icon: <OneMindToolIcon />,
   },
   {
     url: 'https://github.com/backstage/backstage/issues/new/choose',
-    label: 'Submit New Issue',
-    icon: <TemplateBackstageLogoIcon />,
+    label: 'Registrar novo issue',
+    icon: <OneMindToolIcon />,
   },
 ];
+
+export const welcomeCopy = {
+  title: 'Bem-vindo ao OneMind',
+  subtitle:
+    'Descubra serviços, documentações e ferramentas essenciais do seu time em um só lugar',
+};
+
+export const HomeWelcomeHero = () => (
+  <Box mb={3}>
+    <Typography variant="h4" component="h1">
+      {welcomeCopy.title}
+    </Typography>
+    <Typography variant="subtitle1" color="textSecondary" component="p">
+      {welcomeCopy.subtitle}
+    </Typography>
+  </Box>
+);

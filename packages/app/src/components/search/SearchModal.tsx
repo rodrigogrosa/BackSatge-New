@@ -110,9 +110,10 @@ export const SearchModal = ({ toggleModal }: { toggleModal: () => void }) => {
             className={classes.input}
             inputProps={{ ref: searchBarRef }}
             onSubmit={handleSearchBarSubmit}
+            placeholder="Buscar por serviços, documentação e mais"
           />
 
-          <IconButton aria-label="close" onClick={toggleModal}>
+          <IconButton aria-label="Fechar" onClick={toggleModal}>
             <CloseIcon />
           </IconButton>
         </Box>
@@ -125,15 +126,15 @@ export const SearchModal = ({ toggleModal }: { toggleModal: () => void }) => {
               types={[
                 {
                   value: 'software-catalog',
-                  name: 'Software Catalog',
+                  name: 'Catálogo de software',
                 },
                 {
                   value: 'techdocs',
-                  name: 'Documentation',
+                  name: 'Documentação',
                 },
                 {
                   value: 'tools',
-                  name: 'Tools',
+                  name: 'Ferramentas',
                 },
               ]}
             />
@@ -143,7 +144,7 @@ export const SearchModal = ({ toggleModal }: { toggleModal: () => void }) => {
               <Grid item xs={2}>
                 <SearchFilter.Select
                   className={classes.filter}
-                  label="Entity"
+                  label="Entidade"
                   name="name"
                   values={async () => {
                     // Return a list of entities which are documented.
@@ -168,17 +169,23 @@ export const SearchModal = ({ toggleModal }: { toggleModal: () => void }) => {
             <Grid item xs={2}>
               <SearchFilter.Select
                 className={classes.filter}
-                label="Kind"
+                label="Tipo"
                 name="kind"
-                values={['Component', 'Template']}
+                values={[
+                  { value: 'Component', label: 'Componente' },
+                  { value: 'Template', label: 'Template' },
+                ]}
               />
             </Grid>
             <Grid item xs={2}>
               <SearchFilter.Select
                 className={classes.filter}
-                label="Lifecycle"
+                label="Ciclo de vida"
                 name="lifecycle"
-                values={['experimental', 'production']}
+                values={[
+                  { value: 'experimental', label: 'Experimental' },
+                  { value: 'production', label: 'Produção' },
+                ]}
               />
             </Grid>
             <Grid
@@ -197,7 +204,7 @@ export const SearchModal = ({ toggleModal }: { toggleModal: () => void }) => {
                   onClick={handleSearchBarSubmit}
                   disableRipple
                 >
-                  View Full Results
+                  Ver resultados completos
                 </Button>
               </Grid>
             </Grid>

@@ -17,12 +17,10 @@
 import { Page, Content, Header } from '@backstage/core-components';
 import {
   HomePageCompanyLogo,
-  TemplateBackstageLogo,
   HomePageStarredEntities,
   HomePageToolkit,
   HomePageTopVisited,
   HomePageRecentlyVisited,
-  WelcomeTitle,
   HeaderWorldClock,
   ClockConfig,
 } from '@backstage/plugin-home';
@@ -31,7 +29,8 @@ import { SearchContextProvider } from '@backstage/plugin-search-react';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { tools, useLogoStyles } from './shared';
+import { tools, useLogoStyles, welcomeCopy } from './shared';
+import LogoFull from '../Root/LogoFull';
 
 const useStyles = makeStyles(theme => ({
   searchBarInput: {
@@ -73,12 +72,16 @@ const timeFormat: Intl.DateTimeFormatOptions = {
 
 export const HomePage = () => {
   const classes = useStyles();
-  const { svg, path, container } = useLogoStyles();
+  const { container, logoWrapper } = useLogoStyles();
 
   return (
     <SearchContextProvider>
       <Page themeId="home">
-        <Header title={<WelcomeTitle />} pageTitleOverride="Home">
+        <Header
+          title={welcomeCopy.title}
+          subtitle={welcomeCopy.subtitle}
+          pageTitleOverride="Início"
+        >
           <HeaderWorldClock
             clockConfigs={clockConfigs}
             customTimeFormat={timeFormat}
@@ -88,7 +91,7 @@ export const HomePage = () => {
           <Grid container justifyContent="center" spacing={2}>
             <HomePageCompanyLogo
               className={container}
-              logo={<TemplateBackstageLogo classes={{ svg, path }} />}
+              logo={<LogoFull className={logoWrapper} />}
             />
             <Grid container item xs={12} justifyContent="center">
               <HomePageSearchBar
@@ -98,7 +101,7 @@ export const HomePage = () => {
                     notchedOutline: classes.searchBarOutline,
                   },
                 }}
-                placeholder="Search"
+                placeholder="Buscar no OneMind"
               />
             </Grid>
             <Grid container item xs={12}>
